@@ -6,7 +6,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator, CardStyleInterpolators, TransitionPresets } from '@react-navigation/stack';
 import IndividualMessageUI from './individualMessageUI.js';
 import Entypo from 'react-native-vector-icons/Entypo'
-import App from './TEST.js';
 import { useNavigation } from '@react-navigation/native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import AntDesign from 'react-native-vector-icons/AntDesign';

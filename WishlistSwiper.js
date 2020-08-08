@@ -1,7 +1,5 @@
 import React,{Component} from 'react';
 import { View,Text,StyleSheet,Button,Image, ListView,TouchableOpacity, ScrollView} from 'react-native';
-import { CreatePostDetails } from './CreatePostDetails';
-import { CreatePost } from './CreatePost';
 import { Header } from './Header';
 import { ProfilePost } from './ProfilePost';
 

@@ -6,7 +6,6 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Create from './Create';
 import Search from './Search';
 import Message from './Message';
-import Test from './TEST';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack'
 import HomeView from './HomeView';
