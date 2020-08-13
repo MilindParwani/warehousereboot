@@ -1,99 +1,124 @@
 import React,{Component} from 'react';
-import { View,Text,StyleSheet,Button,Image, ListView,TouchableOpacity, Linking} from 'react-native';
+import { View,Text,StyleSheet,Button,Image, ListView,TouchableOpacity, ScrollView} from 'react-native';
+import Swiper from 'react-native-swiper';
+import Entypo from 'react-native-vector-icons/Entypo' ;
+import Home from './Home';
+import Search from './Search';
+import Messages from './Messages';
+import Profile from './Profile';
+import LogIn from './LogIn';
+import SignUp from './SignUp';
+import { Slider }from './Profile';
+import { createStackNavigator, TransitionPresets, CardStyleInterpolators } from '@react-navigation/stack';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 
-  export default class App extends Component {
-  render() {
-    return(
-      <View style={styles.header}>
-        <Text style={styles.specialText}>WAREHOUSE</Text>
-        <View style={styles.container}>
-          <Text style={styles.specialText}>LOG IN USING</Text>
-          <View>
-            <TouchableOpacity style={{top: 27}} activeOpacity={0.5}>
-              <Image 
-                style={{width:99, height:75}}
-                source={require('./images/warehouse-header.jpg')}
-              />
-            </TouchableOpacity>
-          </View>
-          <View style={{top: 55}}><Text style={styles.text}>OR</Text></View>
-        </View>
-        <View style={styles.imageContainer}>
-          <TouchableOpacity style={{bottom:10, right:40}} activeOpacity={0.5}>
-            <Image 
-              source={require('./images/facebook.jpg')}
-              style={{width:40, height: 40}}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity style={{bottom:10, right:20}} activeOpacity={0.5}>
-            <Image 
-              source={require('./images/snapchat-vector.jpg')}
-              style={{width:45, height: 45}}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity style={{bottom: 10, right: 3}} activeOpacity={0.5}>
-            <Image 
-              source={require('./images/instagram-vector.jpg')}
-              style={{width:40, height: 40}}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity style={{bottom: 10, left: 15}} activeOpacity={0.5}>
-            <Image 
-              source={require('./images/google.jpg')}
-              style={{width:40, height: 40}}
-            />
-          </TouchableOpacity>
+const Stack = createStackNavigator();
 
-          
-          
-        </View>
-        <View style={styles.footer}>
-          <Text style={styles.text}>NOT A MEMBER?</Text>
-          <TouchableOpacity style={{top: 25}} activeOpacity={0.5}>
-            <Text style={styles.specialText}>SIGN UP</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-
-    );
-  }
+export default function App() {
+  return(
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName='Home' screenOptions={{headerShown: false,cardStyleInterpolator: CardStyleInterpolators.forNoAnimation}}>
+        <Stack.Screen name='Home' component={HomeView} />
+        <Stack.Screen name='Search' component={SearchView} />
+        <Stack.Screen name='Messages' component={MessagesView} />
+        <Stack.Screen name='Profile' component={ProfileView} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  )
 }
 
+function HomeView() {
+  const navigation = useNavigation();
+  return(
+    <View style={{height: '100%', width: '100%', backgroundColor: '#121212', alignItems: 'center'}}>
+      <View style={{flexDirection: 'row', top: 20}}>
+        <TouchableOpacity style={{marginRight: 15}}  >
+          <Text style={{color: 'white', fontWeight: 'bold', fontSize: 25, borderBottomColor: '#49cadb', borderBottomWidth: 2, paddingBottom: 10}}>Home</Text>
+        </TouchableOpacity >
+        <TouchableOpacity style={{marginRight: 15}} onPress={() => navigation.navigate('Search')}>
+          <Text style={{color: 'white', fontWeight: 'bold', fontSize: 25}}>Search</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={{marginRight: 15}} onPress={() => navigation.navigate('Messages')}>
+          <Text style={{color: 'white', fontWeight: 'bold', fontSize: 25}}>Messages</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('Profile')} onPress={() => navigation.navigate('Profile')}>
+          <Text style={{color: 'white', fontWeight: 'bold', fontSize: 25}}>Profile</Text>
+        </TouchableOpacity>
+      </View>
+      <Home />
+    </View>
+  )
+}
 
-export const styles = StyleSheet.create({
-  header: {
-    flex: 1,
-    alignItems: 'center',
-    backgroundColor: '#121212',
-    paddingTop: 25
-  },
-  container: {
-    paddingTop: 160,
-    alignItems: 'center'
-  },
-  text: {
-    color: 'white',
-    fontWeight: 'bold',
-    fontSize: 13,
-    letterSpacing: 2,
-    fontFamily: 'normal'
-  },
-  specialText: {
-    color: 'white',
-    fontWeight: 'bold',
-    fontSize: 16,
-    letterSpacing: 2,
-    fontFamily: 'normal'
-    
-  },
-  imageContainer: {
-    top:90,
-    paddingLeft: 20,
-    alignItems:'center',
-    flexDirection: 'row'
-  },
-  footer: {
-    top: 190,
-    alignItems: 'center'
-  }
-})
+function SearchView() {
+  const navigation = useNavigation();
+  return(
+    <View style={{height: '100%', width: '100%', backgroundColor: '#121212', alignItems: 'center'}}>
+      <View style={{flexDirection: 'row', top: 20}}>
+        <TouchableOpacity style={{marginRight: 15}}  onPress={() => navigation.navigate('Home')} >
+          <Text style={{color: 'white', fontWeight: 'bold', fontSize: 25}}>Home</Text>
+        </TouchableOpacity >
+        <TouchableOpacity style={{marginRight: 15}}>
+          <Text style={{color: 'white', fontWeight: 'bold', fontSize: 25, borderBottomColor: '#49cadb', borderBottomWidth: 2, paddingBottom: 10}}>Search</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={{marginRight: 15}} onPress={() => navigation.navigate('Messages')}>
+          <Text style={{color: 'white', fontWeight: 'bold', fontSize: 25}}>Messages</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
+          <Text style={{color: 'white', fontWeight: 'bold', fontSize: 25}}>Profile</Text>
+        </TouchableOpacity>
+      </View>
+      <Search />
+    </View>
+  )
+}
+
+function MessagesView() {
+  const navigation = useNavigation();
+  return(
+    <View style={{height: '100%', width: '100%', backgroundColor: '#121212', alignItems: 'center'}}>
+      <View style={{flexDirection: 'row', top: 20}}>
+        <TouchableOpacity style={{marginRight: 15}} onPress={() => navigation.navigate('Home')} >
+          <Text style={{color: 'white', fontWeight: 'bold', fontSize: 25}}>Home</Text>
+        </TouchableOpacity >
+        <TouchableOpacity style={{marginRight: 15}} onPress={() => navigation.navigate('Search')}>
+          <Text style={{color: 'white', fontWeight: 'bold', fontSize: 25}}>Search</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={{marginRight: 15}} >
+          <Text style={{color: 'white', fontWeight: 'bold', fontSize: 25, borderBottomColor: '#49cadb', borderBottomWidth: 2, paddingBottom: 10}}>Messages</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('Profile')} onPress={() => navigation.navigate('Profile')}>
+          <Text style={{color: 'white', fontWeight: 'bold', fontSize: 25}}>Profile</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={{height: '100%', width: '100%', top: 50}}>
+        <Messages />
+      </View>
+    </View>
+  )
+}
+
+function ProfileView() {
+  const navigation = useNavigation();
+  return(
+    <View style={{height: '100%', width: '100%', backgroundColor: '#121212', alignItems: 'center'}}>
+      <View style={{flexDirection: 'row', top: 20}}>
+        <TouchableOpacity style={{marginRight: 15}} onPress={() => navigation.navigate('Home')}  >
+          <Text style={{color: 'white', fontWeight: 'bold', fontSize: 25}}>Home</Text>
+        </TouchableOpacity >
+        <TouchableOpacity style={{marginRight: 15}} onPress={() => navigation.navigate('Search')}>
+          <Text style={{color: 'white', fontWeight: 'bold', fontSize: 25}}>Search</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={{marginRight: 15}} onPress={() => navigation.navigate('Messages')}>
+          <Text style={{color: 'white', fontWeight: 'bold', fontSize: 25}}>Messages</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('Profile')} >
+          <Text style={{color: 'white', fontWeight: 'bold', fontSize: 25, borderBottomColor: '#49cadb', borderBottomWidth: 2, paddingBottom: 10}}>Profile</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={{width: '100%', height: '100%', top: 50}}>
+        <Profile />
+      </View>
+    </View>
+  )
+}

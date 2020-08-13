@@ -1,178 +1,86 @@
 import React,{Component} from 'react';
 import { View,Text,StyleSheet,Button,Image, ListView,TouchableOpacity, ScrollView, TextInput} from 'react-native';
-import  { SearchPost } from './SearchPost';
-import { Header } from './Header'
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator, TransitionPresets, CardStyleInterpolators  } from '@react-navigation/stack';
-import  SearchView  from './SearchView';
-import SearchClick from './SearchClick';
-import { useNavigation } from '@react-navigation/native';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
-import Entypo from 'react-native-vector-icons/Entypo';
+import Swiper from 'react-native-swiper';
+import Entypo from 'react-native-vector-icons/Entypo' ;
+import EvilIcons from 'react-native-vector-icons/EvilIcons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome'
 
-
-function Default() {
-    const navigation = useNavigation();
+export default function Search() {
     return(
-        <View style={styles.header}>
-        <View style={{width: '100%', top: 50}}>
-            <Header />
-        </View>
-        <View style={styles.container}>
-            <View style={{top: 5}}>
-                <View style={{top: 160}}>
-                    <View style={{left: 22}}>
-                        <TouchableOpacity style={{bottom: 212, left: 330}} activeOpacity={0.5}>
-                            <FontAwesome5Icon name='search' color='white' size={25} />
-                        </TouchableOpacity>
-                        <TouchableOpacity style={{bottom: 240, right: 15, width: '96%', zIndex: 1}}>
-                            <TextInput 
-                                onTouchStart={() => navigation.navigate('Click')}
-                                style={styles.input}
-                                placeholder='Search'
-                                placeholderTextColor='white'
-                            />
-                        </TouchableOpacity>
-                    </View>
-                    <View style={{flexDirection: 'row', left: 155}}>
-                        <TouchableOpacity style={styles.search} activeOpacity={0.5}>
-                            <Text style={styles.text}>All</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={styles.search} activeOpacity={0.5}>
-                            <Text style={styles.text}>Decor</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={styles.search} activeOpacity={0.5}>
-                            <Text style={styles.text}>Electronics</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={styles.search} activeOpacity={0.5}>
-                            <Text style={styles.text}>Clothes</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={styles.search} activeOpacity={0.5}>
-                            <Text style={styles.text}>Sports</Text>
-                        </TouchableOpacity>
-                    </View>
-                </View>
-                <View>
-                    <TouchableOpacity style={{flexDirection: 'row', bottom: 60,left: 10, flexDirection: 'row'}} activeOpacity={0.5}>
-                        <Text style={{fontWeight: 'bold', fontSize: 20, color: 'white', fontFamily:'normal'}}>Trending</Text>
-                        <Entypo name='chevron-right' color='white' size={25} style={{top: 2}} />
-                    </TouchableOpacity>
-                </View>
-                <View style={{flexDirection: 'row', top: 120, left: 142}}>
-                    <SearchPost />
-                    <SearchPost />
-                    <SearchPost />
-                    <SearchPost />
-                </View>
-                <View>
-                    <TouchableOpacity style={{flexDirection: 'row', bottom: 30,left: 10, flexDirection: 'row'}} activeOpacity={0.5}>
-                        <Text style={{fontWeight: 'bold', fontSize: 20, color: 'white', fontFamily:'normal',}}>Sellers Of The Week</Text>
-                        <Entypo name='chevron-right' color='white' size={25} style={{top: 2}} />
-                    </TouchableOpacity>
-                </View>
-                <View style={{flexDirection: 'row', top: 150, left: 142}}>
-                    <SearchPost />
-                    <SearchPost />
-                    <SearchPost />
-                    <SearchPost />
-                </View>
-                <View>
-                    <TouchableOpacity style={{flexDirection: 'row', bottom: 0, left: 10,flexDirection: 'row'}} activeOpacity={0.5}>
-                        <Text style={{fontWeight: 'bold', fontSize: 20, color: 'white', fontFamily:'normal',}}>Products Of The Week</Text>
-                        <Entypo name='chevron-right' color='white' size={25} style={{top: 2}} />
-                    </TouchableOpacity>
-                </View>
-                <View style={{flexDirection: 'row', top: 180, left: 142}}>
-                    <SearchPost />
-                    <SearchPost />
-                    <SearchPost />
-                    <SearchPost />
-                </View>
-            </View>
-        </View>
-    </View>
-    )
-}
-
-function Click() {
-    const navigation = useNavigation();
-    return(
-        <View>
-            <SearchClick />
-            <TouchableOpacity style={{left: 345, top: 85}} onPress={() => navigation.navigate('Default')} activeOpacity={0.5}>
-                <Text style={styles.text}>Cancel</Text>
+      <View style={{height: '100%', width: '97.5%', alignItems: 'center', flexDirection: 'column', top: 60}}>
+          <TextInput 
+            placeholder='Search'
+            placeholderTextColor='white'
+            style={{width: '95%', borderColor: '#282828', borderWidth: 2,  borderRadius: 5, paddingLeft: 10, fontWeight: 'bold', color: 'white', height: 30, marginBottom: 20, fontSize:12.5, paddingBottom: 7.5}}
+          />
+          <View style={{flexDirection: 'row', bottom: 7.5}}>
+            <TouchableOpacity style={{width: 65, height: 30, justifyContent: 'center', alignItems: 'center', borderRadius: 5, borderColor: '#282828', borderWidth: 2, marginRight: 5}}>
+                <Text style={{color: 'white', fontWeight: 'bold'}}>Gaming</Text>
             </TouchableOpacity>
+            <TouchableOpacity style={{width: 65, height: 30, justifyContent: 'center', alignItems: 'center', borderRadius: 5, borderColor: '#282828', borderWidth: 2, marginRight: 5}}>
+                <Text style={{color: 'white', fontWeight: 'bold'}}>Decor</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={{width: 80, height: 30, justifyContent: 'center', alignItems: 'center', borderRadius: 5, borderColor: '#282828', borderWidth: 2, marginRight: 5}}>
+                <Text style={{color: 'white', fontWeight: 'bold'}}>Electronics</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={{width: 65, height: 30, justifyContent: 'center', alignItems: 'center', borderRadius: 5, borderColor: '#282828', borderWidth: 2, marginRight: 5}}>
+                <Text style={{color: 'white', fontWeight: 'bold'}}>Clothing</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={{width: 65, height: 30, justifyContent: 'center', alignItems: 'center', borderRadius: 5, borderColor: '#282828', borderWidth: 2,  marginRight: 5}}>
+                <Text style={{color: 'white', fontWeight: 'bold'}}>Sports</Text>
+            </TouchableOpacity>
+          </View>
+        <TouchableOpacity style={{right: 120, top: 5, flexDirection: 'row'}}>
+            <Text style={{color: 'white', fontSize: 25, fontWeight: 'bold', marginBottom:20}}>Trending</Text>
+            <Entypo name='chevron-right' size={30} color='white' style={{top: 2.5}} />
+        </TouchableOpacity>
+        <View style={{flexDirection: 'row', zIndex: 1, left: 15, marginBottom: 20}}>
+            <ScrollView horizontal={true}>
+                <SearchPost />
+                <SearchPost />
+                <SearchPost />
+                <SearchPost />
+                <SearchPost />
+                <SearchPost />
+            </ScrollView>
+        </View>
+        <TouchableOpacity style={{right: 45, flexDirection: 'row'}}>
+            <Text style={{color: 'white', fontSize: 25, fontWeight: 'bold', marginBottom:20}}>Products Of The Week</Text>
+            <Entypo name='chevron-right' size={30} color='white' style={{top: 2.5}} />
+        </TouchableOpacity>
+        <View style={{flexDirection: 'row', zIndex: 1, left: 15, marginBottom: 20}}>
+            <ScrollView horizontal={true}>
+                <SearchPost />
+                <SearchPost />
+                <SearchPost />
+                <SearchPost />
+                <SearchPost />
+                <SearchPost />
+            </ScrollView>
+        </View>
+        <TouchableOpacity style={{right: 55, flexDirection: 'row'}}>
+            <Text style={{color: 'white', fontSize: 25, fontWeight: 'bold', marginBottom:20}}>Sellers Of The Week</Text>
+            <Entypo name='chevron-right' size={30} color='white' style={{top: 2.5}} />
+        </TouchableOpacity>
+        <View style={{flexDirection: 'row', zIndex: 1, left: 15, marginBottom: 20}}>
+            <ScrollView horizontal={true}>
+                <SearchPost />
+                <SearchPost />
+                <SearchPost />
+                <SearchPost />
+                <SearchPost />
+                <SearchPost />
+            </ScrollView>
+        </View>
+
         </View>
     )
-}
+  }
 
-const Stack = createStackNavigator();
-
-export default class SearchPage extends Component{
-    render() {
-        return(
-            <NavigationContainer independent={true}>
-                <Stack.Navigator screenOptions={{headerShown: false, cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS}} initialRouteName='Default'>
-                    <Stack.Screen name='Default' component={Default} />
-                    <Stack.Screen name='Click' component={Click} />
-                </Stack.Navigator>
-            </NavigationContainer>
-        )
-    }
-}
-
-const styles=StyleSheet.create({
-    header: {
-        position: 'absolute',
-        alignItems: 'center',
-        alignSelf: 'center',
-        backgroundColor: '#121212',
-        width: 412,
-        height: 1000
-    },
-    container: {
-        top: 60,
-        height: 560,
-        position: 'absolute',
-        backgroundColor: '#121212',
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: 412
-    },
-    text: {
-        color: 'white',
-        fontWeight: 'bold',
-        fontSize: 12,
-        fontFamily: 'normal'
-    },
-    input: {
-        width: '100%',
-        height: 35,
-        borderBottomColor: '#282828',
-        borderBottomWidth: 2,
-        fontSize: 16,
-        fontWeight: 'bold',
-        paddingLeft: 10,
-        paddingBottom: 8
-    },
-    search: {
-        width: 70,
-        height: 35,
-        borderColor: '#282828',
-        backgroundColor: 'transparent',
-        borderWidth: 2,
-        fontSize: 12,
-        borderRadius: 10,
-        marginRight: 10,
-        fontWeight: 'bold',
-        alignItems: 'center',
-        justifyContent: 'center',
-        bottom: 230,
-        right: 150,
-        textAlign: 'center',
-        zIndex: 0
-
-
-    }
-})
+  function SearchPost() {
+      return(
+          <TouchableOpacity style={{width: 90, height: 90, backgroundColor: 'white', borderRadius: 10, marginRight: 10}}>
+              
+          </TouchableOpacity>
+      )
+  }

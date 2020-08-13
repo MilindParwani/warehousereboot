@@ -1,594 +1,482 @@
 import React,{Component} from 'react';
-import { View,Text,StyleSheet,Button,Image, ListView,TouchableOpacity, ScrollView} from 'react-native';
-import  { ProfilePost } from './ProfilePost';
-import { Header } from './Header';
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
-import { createStackNavigator, TransitionPresets, CardStyleInterpolators } from '@react-navigation/stack';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import EditProfile from './EditProfile';
-import ItemsToSellOnProfile from './ItemsToSellOnProfile';
-import WishlistSlider from './WishlistSlider';
-import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5';
+import { View,Text,StyleSheet,Button,Image, ListView,TouchableOpacity, ScrollView, TextInput} from 'react-native';
+import Swiper from 'react-native-swiper';
+import Entypo from 'react-native-vector-icons/Entypo' ;
+import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import Entypo from 'react-native-vector-icons/Entypo';
-import Feather from 'react-native-vector-icons/Feather';
-
-function SellerItems({ navigation }) {
-    return(
-        <View>
-            <TouchableOpacity style={{zIndex: 1, top:70, left: 350}} onPress={() => navigation.navigate('EditProfileNav')} activeOpacity={0.5} >
-                <FontAwesome5 name='check-circle' size={50} color='white' />
-            </TouchableOpacity>
-            <ItemsToSellOnProfile />
-        </View>
-    )
-}
-
-
-function EditProfileNav({ navigation }) {
-    return(
-        <View>
-            <TouchableOpacity style={{zIndex: 1, top:72.5, left: 345}} onPress={() => navigation.navigate('Default')} activeOpacity={0.5} >
-                <Ionicons name='checkmark' size={50} color='white' />
-            </TouchableOpacity>
-            <TouchableOpacity style={{zIndex: 1, top:120, left: 205, borderWidth: 1, borderColor: '#282828', height: 20, width: 80, justifyContent: 'center'}} onPress={() => navigation.navigate('SellerItems')} activeOpacity={0.5} >
-                <Text style={{color: 'white', fontWeight: 'bold', fontSize: 15, textAlign: 'center'}}>SELECT</Text>
-            </TouchableOpacity>
-            <EditProfile />
-        </View>
-    )
-}
-
-function PaymentNav({ navigation }) {
-    return(
-        <View>
-            <Payment />
-        </View>
-    )
-}
-
-function PrivacyNav({ navigation }) {
-    return(
-        <View>
-            <Privacy />
-        </View>
-    )
-}
-
-function NotificationsNav({ navigation }) {
-    return(
-        <View>
-            <Notifications />
-            
-        </View>
-    )
-}
-
-function SecurityNav({ navigation }) {
-    return(
-        <View>
-            <Security />
-        </View>
-    )
-}
-
-function PreferencesNav({ navigation }) {
-    return(
-        <View>
-            <Preferences />
-        </View>
-    )
-}
-
-function AccountNav({ navigation }) {
-    return(
-        <View>
-            <Account />
-        </View>
-    )
-}
-
-function HelpNav({ navigation }) {
-    return(
-        <View>
-            <Help />
-        </View>
-    )
-}
-
-function AboutNav({ navigation }) {
-    return(
-        <View>
-            <About />
-        </View>
-    )
-}
-
-function SettingsNav({ navigation }) {
-    return(
-        <View style={{flex: 1, backgroundColor: '#121212'}}>
-            <View style={{zIndex: 1, top: 50}}>
-                <Header />
-            </View>
-            <View style={{flexDirection:'column', zIndex: 1, width: '100%', height: 482.5, top: 25, paddingTop: 30}}>
-                <TouchableOpacity style={{zIndex: 1, width: '100%', height: 50, flexDirection: 'row',borderBottomColor:'#282828', borderBottomWidth: 1, borderTopWidth: 1, borderTopColor: '#282828', alignItems: 'center'}} onPress={() => navigation.navigate('PaymentNav')}>
-                    <MaterialCommunityIcons name='cash-usd' size={25} color='white' style={{left: 10, marginRight: 15}} />
-                    <Text style={{fontWeight: 'bold', color: 'white', fontSize: 16}}>Payment</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={{width: '100%', height: 50,flexDirection: 'row',zIndex: 1, borderBottomColor:'#282828', borderBottomWidth: 1, alignItems: 'center'}} onPress={() => navigation.navigate('PrivacyNav')} activeOpacity={0.5}>
-                    <MaterialCommunityIcons name='lock' size={25} color='white' style={{left: 10, marginRight: 15}}/>
-                    <Text style={{fontWeight: 'bold', fontFamily: 'normal', color: 'white', fontSize: 16}}>Privacy</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={{width: '100%', height: 50, flexDirection: 'row', zIndex: 1, borderBottomColor:'#282828', borderBottomWidth: 1, alignItems: 'center'}} onPress={() => navigation.navigate('NotificationsNav')} activeOpacity={0.5}>
-                    <MaterialCommunityIcons name='bell' size={25} color='white' style={{left: 10, marginRight: 15}} />
-                    <Text style={{fontWeight: 'bold', fontFamily: 'normal', color: 'white', fontSize: 16}}>Notifications</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={{width: '100%', height: 50, flexDirection: 'row',  zIndex: 1, borderBottomColor:'#282828', borderBottomWidth: 1, alignItems: 'center'}} onPress={() => navigation.navigate('SecurityNav')} activeOpacity={0.5}>
-                    <MaterialCommunityIcons name='shield-alert' size={25} color='white' style={{left: 10, marginRight: 17.5}} />
-                    <Text style={{fontWeight: 'bold', fontFamily: 'normal', color: 'white', fontSize: 16}}>Security</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={{width: '100%', height: 50, flexDirection: 'row', zIndex: 1, borderBottomColor:'#282828', borderBottomWidth: 1, alignItems: 'center'}} onPress={() => navigation.navigate('PreferencesNav')} activeOpacity={0.5}>
-                    <MaterialCommunityIcons name='lightbulb' size={25} color='white' style={{left: 10, marginRight: 17.5}} />
-                    <Text style={{fontWeight: 'bold', fontFamily: 'normal', color: 'white', fontSize: 16}}>Preferences</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={{width: '100%', height: 50, flexDirection: 'row', zIndex: 1, borderBottomColor:'#282828', borderBottomWidth: 1, alignItems: 'center'}} onPress={() => navigation.navigate('AccountNav')} activeOpacity={0.5}>
-                    <FontAwesome5  name='user-circle' color={'white'} size={22.5}  style={{left: 11, marginRight: 20}}/>
-                    <Text style={{fontWeight: 'bold', fontFamily: 'normal', color: 'white', fontSize: 16}}>Account</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={{width: '100%', height: 50,  zIndex: 1, borderBottomColor:'#282828', borderBottomWidth: 1, alignItems: 'center', flexDirection: 'row'}} onPress={() => navigation.navigate('HelpNav')} activeOpacity={0.5}>
-                    <MaterialCommunityIcons name='help-circle' size={25} color='white' style={{left: 10, marginRight: 19}} />
-                    <Text style={{fontWeight: 'bold', fontFamily: 'normal', color: 'white', fontSize: 16}}>Help</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={{width: '100%', height: 50, flexDirection: 'row', zIndex: 1, borderBottomColor:'#282828', borderBottomWidth: 1, alignItems: 'center'}} onPress={() => navigation.navigate('AboutNav')} activeOpacity={0.5}>
-                    <MaterialCommunityIcons name='information' size={25} color='white' style={{left: 10, marginRight: 18}} />
-                    <Text style={{fontWeight: 'bold', fontFamily: 'normal', color: 'white', fontSize: 16}}>About</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={{width: '100%', height: 50, borderBottomColor:'#282828', borderBottomWidth: 1, flexDirection: 'row', alignItems: 'center'}} activeOpacity={0.5}>
-                    <MaterialCommunityIcons name='logout-variant' size={25} color='white' style={{left: 10, marginRight: 17.5}} />
-                    <Text style={{fontWeight: 'bold', fontFamily: 'normal', color: 'white', fontSize: 16}}>Log Out</Text>
-                </TouchableOpacity>
-            </View>
-        </View>
-    )
-}
-
-function Default({ navigation }) {
-    return(
-        <View style={{bottom: 50}}>
-            <View style={{top: 40}}>
-                <TouchableOpacity style={{ backgroundColor: '#282828',left: 352.5,top: 105, width: 50, height: 30, alignItems: 'center', justifyContent: 'center', borderRadius: 20, zIndex: 1}} onPress={() => navigation.navigate('Settings')} activeOpacity={0.5}>
-                    <Ionicons name='md-settings-outline' color='white' size={20} />
-                </TouchableOpacity>
-                <TouchableOpacity style={{ backgroundColor: '#282828',left: 352.5,top: 50, width: 50, height: 20, alignItems: 'center', justifyContent: 'center', borderRadius: 20, zIndex: 1}} onPress={() => navigation.navigate('EditProfileNav')} activeOpacity={0.5}>
-                    <Text style={{color: 'white', fontSize: 20, bottom: 7.5}}>...</Text>
-                </TouchableOpacity>
-            </View>
-            <View>
-                <ProfileView />
-            </View>
-        </View>
-    )
-}
-
-function WishlistNav() {
-    const navigation = useNavigation();
-    return(
-        <View style={{width: '100%', height: 392.5, backgroundColor: '#121212', top: 220}}>
-            <View style={{backgroundColor: '#282828', width: '92%', height: 40, borderRadius: 7.5, justifyContent: 'center', flexDirection: 'row', left: 15}}>
-                <TouchableOpacity style={{height: 35, width: '48%', borderRadius: 7.5, top: 2.5, marginRight: 5}} onPress={() => navigation.navigate('Posts') }>
-                    <Text style={styles.text}>MY POSTS</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={{height: 35, width: '48%', backgroundColor: '#121212', borderRadius: 7.5, top: 2.5}}>
-                    <Text style={styles.text}>WISHLIST</Text>
-                </TouchableOpacity>
-            </View>
-        </View>
-    )
-}
-
-function MyPosts() {
-    const navigation = useNavigation();
-    return(
-        <View style={{width: '100%', height: 392.5, backgroundColor: '#121212', top: 220}}>
-            <View style={{backgroundColor: '#282828', width: '92%', height: 40, borderRadius: 7.5, justifyContent: 'center', flexDirection: 'row', left: 15}}>
-                <TouchableOpacity style={{height: 35, width: '48%',backgroundColor: '#121212', borderRadius: 7.5, top: 2.5, marginRight: 5}}>
-                    <Text style={styles.text}>MY POSTS</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={{height: 35, width: '48%', borderRadius: 7.5, top: 2.5}} onPress={() => navigation.navigate('Wishlist')}>
-                    <Text style={styles.text}>WISHLIST</Text>
-                </TouchableOpacity>
-            </View>
-        </View>
-    )
-}
-
-class About extends Component{
-    render() {
-        return(
-            <View style={styles.header}>
-                <View style={{top: 50, width: '100%'}}>
-                    <Header />
-                </View>
-                <View style={styles.container}>
-                    <AboutS />
-                </View>
-            </View>
-        )
-    }
-}
-
-function AboutS() {
-    return(
-        <View style={{height: '100%', width: '100%', top: 50}}>
-            <View>
-                <TouchableOpacity style={{width: '90%', height: '27%', backgroundColor: '#282828', borderRadius: 20, left: 18, top: 10, justifyContent: 'center', alignItems: 'center', fontFamily: 'normal'}}>
-                    <Text style={{fontSize: 15, color: 'white', fontFamily: 'normal', fontWeight: 'bold', letterSpacing: 1}}>TERMS AND CONDITIONS</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={{width: '90%', height: '27%', backgroundColor: '#282828', borderRadius: 20, left: 18, top: 20, justifyContent: 'center', alignItems: 'center', fontFamily: 'normal'}}>
-                    <Text style={{fontSize: 15, color: 'white', fontFamily: 'normal', fontWeight: 'bold', letterSpacing: 1}}>PRIVACY POLICY</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={{width: '90%', height: '27%', backgroundColor: '#282828', borderRadius: 20, left: 18, top: 30, justifyContent: 'center', alignItems: 'center', fontFamily: 'normal'}}>
-                    <Text style={{fontSize: 15, color: 'white', fontFamily: 'normal', fontWeight: 'bold', letterSpacing: 1}}>LEGAL</Text>
-                </TouchableOpacity>
-            </View>
-        </View>
-    )
-}
-
-class Account extends Component{
-    render() {
-        return(
-            <View style={styles.header}>
-                <View style={{top: 50, width: '100%'}}>
-                    <Header />
-                </View>
-                <View style={styles.container}>
-                    <AccountS />
-                </View>
-            </View>
-        )
-    }
-}
-
-function AccountS() {
-    return(
-        <View style={{height: '100%', width: '100%', top: 50}}>
-            <View>
-                <TouchableOpacity style={{width: '90%', height: '27%', backgroundColor: '#282828', borderRadius: 20, left: 18, top: 10, justifyContent: 'center', alignItems: 'center', fontFamily: 'normal'}}>
-                    <Text style={{fontSize: 15, color: 'white', fontFamily: 'normal', fontWeight: 'bold', letterSpacing: 1}}>CHANGE ACCOUNT DETAILS</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={{width: '90%', height: '27%', backgroundColor: '#282828', borderRadius: 20, left: 18, top: 20, justifyContent: 'center', alignItems: 'center', fontFamily: 'normal'}}>
-                    <Text style={{fontSize: 15, color: 'white', fontFamily: 'normal', fontWeight: 'bold', letterSpacing: 1}}>LANGUAGE</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={{width: '90%', height: '27%', backgroundColor: '#282828', borderRadius: 20, left: 18, top: 30, justifyContent: 'center', alignItems: 'center', fontFamily: 'normal'}}>
-                    <Text style={{fontSize: 15, color: 'white', fontFamily: 'normal', fontWeight: 'bold', letterSpacing: 1}}>CONNECTED ACCOUNTS</Text>
-                </TouchableOpacity>
-            </View>
-        </View>
-    )
-}
-
-class Help extends Component{
-    render() {
-        return(
-            <View style={styles.header}>
-                <View style={{top: 50, width: '100%'}}>
-                    <Header />
-                </View>
-                <View style={styles.container}>
-                    <HelpS />
-                </View>
-            </View>
-        )
-    }
-}
-
-function HelpS() {
-    return(
-        <View style={{height: '100%', width: '100%', top: 50}}>
-            <View>
-                <TouchableOpacity style={{width: '90%', height: '27%', backgroundColor: '#282828', borderRadius: 20, left: 18, top: 20, justifyContent: 'center', alignItems: 'center', fontFamily: 'normal'}}>
-                    <Text style={{fontSize: 15, color: 'white', fontFamily: 'normal', fontWeight: 'bold', letterSpacing: 1}}>FREQUENTLY ASKED QUESTIONS</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={{width: '90%', height: '27%', backgroundColor: '#282828', borderRadius: 20, left: 18, top: 30, justifyContent: 'center', alignItems: 'center', fontFamily: 'normal'}}>
-                    <Text style={{fontSize: 15, color: 'white', fontFamily: 'normal', fontWeight: 'bold', letterSpacing: 1}}>GIVE US SOME FEEDBACK</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={{width: '90%', height: '27%', backgroundColor: '#282828', borderRadius: 20, left: 18, top: 40, justifyContent: 'center', alignItems: 'center', fontFamily: 'normal'}}>
-                    <Text style={{fontSize: 15, color: 'white', fontFamily: 'normal', fontWeight: 'bold', letterSpacing: 1}}>REPORT A BUG</Text>
-                </TouchableOpacity>
-            </View>
-        </View>
-    )
-}
-
-class Preferences extends Component{
-    render() {
-        return(
-            <View style={styles.header}>
-                <View style={{top: 50, width: '100%'}}>
-                    <Header />
-                </View>
-                <View style={styles.container}>
-                    <PreferencesS />
-                </View>
-            </View>
-        )
-    }
-}
-
-function PreferencesS() {
-    return(
-        <View style={{height: '100%', width: '100%', top: 50}}>
-            <View>
-                <TouchableOpacity style={{width: '90%', height: '27%', backgroundColor: '#282828', borderRadius: 20, left: 18, top: 20, justifyContent: 'center', alignItems: 'center', fontFamily: 'normal'}}>
-                    <Text style={{fontSize: 15, color: 'white', fontFamily: 'normal', fontWeight: 'bold', letterSpacing: 1}}>LIGHT OR DARK MODE</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={{width: '90%', height: '27%', backgroundColor: '#282828', borderRadius: 20, left: 18, top: 30, justifyContent: 'center', alignItems: 'center', fontFamily: 'normal'}}>
-                    <Text style={{fontSize: 15, color: 'white', fontFamily: 'normal', fontWeight: 'bold', letterSpacing: 1}}>LOCATION SETTINGS</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={{width: '90%', height: '27%', backgroundColor: '#282828', borderRadius: 20, left: 18, top: 40, justifyContent: 'center', alignItems: 'center', fontFamily: 'normal'}}>
-                    <Text style={{fontSize: 15, color: 'white', fontFamily: 'normal', fontWeight: 'bold', letterSpacing: 1}}>ACCOUNT TYPE</Text>
-                </TouchableOpacity>
-            </View>
-        </View>
-    )
-}
-
-class Payment extends Component{
-    render() {
-        return(
-            <View style={styles.header}>
-                <View style={{top: 50, width: '100%'}}>
-                    <Header />
-                </View>
-                <View style={styles.container}>
-                    <PaymentSettings />
-                </View>
-            </View>
-        )
-    }
-}
-
-function PaymentSettings() {
-    return(
-        <View style={{height: '100%', width: '100%', top: 50}}>
-            <View>
-                <TouchableOpacity style={{width: '90%', height: '27%', backgroundColor: '#282828', borderRadius: 20, left: 18, top: 10, justifyContent: 'center', alignItems: 'center', fontFamily: 'normal'}}>
-                    <Text style={{fontSize: 15, color: 'white', fontFamily: 'normal', fontWeight: 'bold', letterSpacing: 1}}>UPCOMING TRANSACTIONS</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={{width: '90%', height: '27%', backgroundColor: '#282828', borderRadius: 20, left: 18, top: 20, justifyContent: 'center', alignItems: 'center', fontFamily: 'normal'}}>
-                    <Text style={{fontSize: 15, color: 'white', fontFamily: 'normal', fontWeight: 'bold', letterSpacing: 1}}>PREVIOUS TRANSACTIONS</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={{width: '90%', height: '27%', backgroundColor: '#282828', borderRadius: 20, left: 18, top: 30, justifyContent: 'center', alignItems: 'center', fontFamily: 'normal'}}>
-                    <Text style={{fontSize: 15, color: 'white', fontFamily: 'normal', fontWeight: 'bold', letterSpacing: 1}}>PAYMENT METHODS</Text>
-                </TouchableOpacity>
-            </View>
-        </View>
-    )
-}
-
-class Notifications extends Component{
-    render() {
-        return(
-            <View style={styles.header}>
-                <View style={{top: 50, width: '100%'}}>
-                    <Header />
-                </View>
-                <View style={styles.container}>
-                    <NotificationsS />
-                </View>
-            </View>
-        )
-    }
-}
-
-function NotificationsS() {
-    return(
-        <View style={{height: '100%', width: '100%', top: 50}}>
-            <View>
-                <TouchableOpacity style={{width: '90%', height: '27%', backgroundColor: '#282828', borderRadius: 20, left: 18, top: 10, justifyContent: 'center', alignItems: 'center', fontFamily: 'normal'}}>
-                    <Text style={{fontSize: 15, color: 'white', fontFamily: 'normal', fontWeight: 'bold', letterSpacing: 1}}>ON</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={{width: '90%', height: '27%', backgroundColor: '#282828', borderRadius: 20, left: 18, top: 20, justifyContent: 'center', alignItems: 'center', fontFamily: 'normal'}}>
-                    <Text style={{fontSize: 15, color: 'white', fontFamily: 'normal', fontWeight: 'bold', letterSpacing: 1}}>OFF</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={{width: '90%', height: '27%', backgroundColor: '#282828', borderRadius: 20, left: 18, top: 30, justifyContent: 'center', alignItems: 'center', fontFamily: 'normal'}}>
-                    <Text style={{fontSize: 15, color: 'white', fontFamily: 'normal', fontWeight: 'bold', letterSpacing: 1}}>MANAGE</Text>
-                </TouchableOpacity>
-            </View>
-        </View>
-    )
-}
-
-class Privacy extends Component{
-    render() {
-        return(
-            <View style={styles.header}>
-                <View style={{top: 50, width: '100%'}}>
-                    <Header />
-                </View>
-                <View style={styles.container}>
-                    <PrivacyS />
-                </View>
-            </View>
-        )
-    }
-}
-
-function PrivacyS() {
-    return(
-        <View style={{height: '100%', width: '100%', top: 50}}>
-            <View>
-                <TouchableOpacity style={{width: '90%', height: '27%', backgroundColor: '#282828', borderRadius: 20, left: 18, top: 10, justifyContent: 'center', alignItems: 'center', fontFamily: 'normal'}}>
-                    <Text style={{fontSize: 15, color: 'white', fontFamily: 'normal', fontWeight: 'bold', letterSpacing: 1}}>ADS</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={{width: '90%', height: '27%', backgroundColor: '#282828', borderRadius: 20, left: 18, top: 20, justifyContent: 'center', alignItems: 'center', fontFamily: 'normal'}}>
-                    <Text style={{fontSize: 15, color: 'white', fontFamily: 'normal', fontWeight: 'bold', letterSpacing: 1}}>PEOPLE</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={{width: '90%', height: '27%', backgroundColor: '#282828', borderRadius: 20, left: 18, top: 30, justifyContent: 'center', alignItems: 'center', fontFamily: 'normal'}}>
-                    <Text style={{fontSize: 15, color: 'white', fontFamily: 'normal', fontWeight: 'bold', letterSpacing: 1}}>INTERACTIONS</Text>
-                </TouchableOpacity>
-            </View>
-        </View>
-    )
-}
-
-class Security extends Component{
-    render() {
-        return(
-            <View style={styles.header}>
-                <View style={{top: 50, width: '100%'}}>
-                    <Header />
-                </View>
-                <View style={styles.container}>
-                    <SecurityS />
-                </View>
-            </View>
-        )
-    }
-}
-
-
-function SecurityS() {
-    return(
-        <View style={{height: '100%', width: '100%', top: 50}}>
-            <View>
-                <TouchableOpacity style={{width: '90%', height: '27%', backgroundColor: '#282828', borderRadius: 20, left: 18, top: 10, justifyContent: 'center', alignItems: 'center', fontFamily: 'normal'}}>
-                    <Text style={{fontSize: 15, color: 'white', fontFamily: 'normal', fontWeight: 'bold', letterSpacing: 1}}>DATA</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={{width: '90%', height: '27%', backgroundColor: '#282828', borderRadius: 20, left: 18, top: 20, justifyContent: 'center', alignItems: 'center', fontFamily: 'normal'}}>
-                    <Text style={{fontSize: 15, color: 'white', fontFamily: 'normal', fontWeight: 'bold', letterSpacing: 1}}>LOGIN ACTIVITY</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={{width: '90%', height: '27%', backgroundColor: '#282828', borderRadius: 20, left: 18, top: 30, justifyContent: 'center', alignItems: 'center', fontFamily: 'normal'}}>
-                    <Text style={{fontSize: 15, color: 'white', fontFamily: 'normal', fontWeight: 'bold', letterSpacing: 1}}>2FA AUTHENTICATION</Text>
-                </TouchableOpacity>
-            </View>
-        </View>
-    )
-}
-
-class ProfileView extends Component{
-    render() {
-        return(
-            <View style={styles.header}>
-                <View style={{top: 50, width: '100%'}}>
-                    <Header />
-                </View>
-                <View style={{zIndex: 0, left: 7.5}}>
-                    <View style={{backgroundColor: 'white', width: 50, height: 50, borderRadius: 50, right: 165, top: 20}}>
-
-                    </View>
-                </View>
-                <View style={{top: 55, right: 82.5}}>
-                    <View style={{flexDirection: 'row', bottom: 190, right: 20}}>
-                        <View style={{zIndex: 1, width: 60, height: 30, top: 135, left: 25}}>
-                            <Text style={{color: 'white', fontFamily: 'normal', fontWeight: 'bold', fontSize: 16}}>4.61</Text>
-                        </View>
-                        <MaterialCommunityIcons name='star' color='white' size={20} style={{top: 135}} />                    
-                    </View>
-                    <View style={{left: 5, bottom: 118}}>
-                        <Text style={{fontWeight: 'bold', fontSize: 25, color: 'white'}}>MILIND</Text>
-                    </View>
-                </View>
-                <View style={{top: 155, right: 120, zIndex: 1}}>
-                    <View style={{flexDirection: 'row'}}>
-                        <Text style={{color: 'white', fontWeight: 'bold', fontSize: 16, color: 'white', bottom: 175, left: 65, marginRight: 25, paddingBottom:5}}>Following</Text>
-                        <Text style={{color: 'white', fontWeight: 'bold', fontSize: 16, color: 'white', bottom: 175, left: 65, marginRight: 25}}>Followers</Text>
-                        <Text style={{color: 'white', fontWeight: 'bold', fontSize: 16, color: 'white', bottom: 175, left: 65}}>Category</Text>
-                    </View>
-                    <View style={{flexDirection: 'row'}}>
-                        <Text style={{color: 'white', fontWeight: 'bold', fontSize: 16, color: 'white', bottom: 182, left: 65, marginRight: 25, paddingTop: 5, paddingLeft: 18}}>480</Text>
-                        <Text style={{color: 'white', fontWeight: 'bold', fontSize: 16, color: 'white', bottom: 182, left: 65, marginRight: 25, paddingTop: 5, paddingLeft: 42}}>412</Text>
-                        <View style={{flexDirection: 'row', bottom: 177.5, left: 85}}>
-                            <Ionicons name='shirt' size={17.5} color='white' style={{marginRight: 8, top: 2.5}} />
-                            <MaterialCommunityIcons name='soccer' size={22} color='white' style={{marginRight: 2.5}}/>
-                            <Feather name='plus' size={22.5} color='white' />
-                        </View>
-                    </View>
-                </View>
-                <View style={{width: '100%', zIndex: 1, height: 510}}>
-                    <WishlistSlider />
-                </View>
-            </View>
-        )
-    }
-}
-
-const config = {
-    animation: 'spring',
-    config: {
-      stiffness: 1000,
-      damping: 50,
-      mass: 3,
-      overshootClamping: false,
-      restDisplacementThreshold: 0.01,
-      restSpeedThreshold: 0.01,
-    },
-  };
-
+import Feather from 'react-native-vector-icons/Feather';    
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import { createStackNavigator, TransitionPresets, CardStyleInterpolators } from '@react-navigation/stack';
+import { NavigationContainer, useNavigation, NavigationRouteContext } from '@react-navigation/native';
 
 const Stack = createStackNavigator();
 
-
-export default class Profile extends Component{
+export default class Profile extends Component {
     render() {
         return(
-            <NavigationContainer independent={true} >
-                <Stack.Navigator screenOptions={{
-                    headerShown: false, 
-                    gestureEnabled: true,
-                    gestureDirection: 'horizontal',
-                    cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS
-                    
-                    }} 
-                    initialRouteName='Default'>
-                    <Stack.Screen  name='Settings' component={SettingsNav} />
-                    <Stack.Screen  name='Default' component={Default} />
-                    <Stack.Screen  name='PaymentNav' component={PaymentNav} />
-                    <Stack.Screen  name='PrivacyNav' component={PrivacyNav} />
-                    <Stack.Screen  name='NotificationsNav' component={NotificationsNav} />
-                    <Stack.Screen  name='SecurityNav' component={SecurityNav} />
-                    <Stack.Screen  name='PreferencesNav' component={PreferencesNav} />
-                    <Stack.Screen  name='AccountNav' component={AccountNav} />
-                    <Stack.Screen  name='HelpNav' component={HelpNav} />
-                    <Stack.Screen  name='AboutNav' component={AboutNav} />
-                    <Stack.Screen  name='EditProfileNav' component={EditProfileNav} />
-                    <Stack.Screen  name='SellerItems' component={SellerItems} />
-                    <Stack.Screen  name='Wishlist' component={WishlistNav} />
-                    <Stack.Screen name='Posts' component={MyPosts} />
+            <NavigationContainer independent={true}>
+                <Stack.Navigator initialRouteName='Edit' screenOptions={{headerShown: false, cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS}}>
+                    <Stack.Screen name='Default' component={Default} />
+                    <Stack.Screen name='Edit' component={EditProfile} />
+                    <Stack.Screen name='Settings' component={Settings} />
+                    <Stack.Screen name='Payment' component={Payment} />
+                    <Stack.Screen name='Privacy' component={Privacy} />
+                    <Stack.Screen name='Notifications' component={Notifications} />
+                    <Stack.Screen name='Security' component={Security} />
+                    <Stack.Screen name='Preferences' component={Preferences} />
+                    <Stack.Screen name='Account' component={Account} />
+                    <Stack.Screen name='Help' component={Help} />
+                    <Stack.Screen name='About' component={About} />
+                    <Stack.Screen name='Items' component={ItemsOnProfile} />
                 </Stack.Navigator>
             </NavigationContainer>
         )
     }
 }
 
-const styles=StyleSheet.create({
-    header: {
-        position: 'absolute',
-        alignItems: 'center',
-        alignSelf: 'center',
-        backgroundColor: '#121212',
-        width: 412,
-        height: 1000
-    },
-    container: {
-        top: 60,
-        height: 560,
-        position: 'absolute',
-        backgroundColor: '#121212',
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: 412
-    },
-    text: {
-        top: 7.5,
-        color: 'white',
-        fontWeight: 'bold',
-        fontSize: 13,
-        letterSpacing: 2,
-        fontFamily: 'normal',
-        textAlign: 'center'
+function Settings() {
+    const navigation = useNavigation();
+    return(
+        <View style={{flex: 1, backgroundColor: '#121212'}}>
+            <View style={{flexDirection: 'column'}}>
+                <TouchableOpacity style={{width: '100%', height: 50, flexDirection: 'row', borderBottomWidth: 1, borderBottomColor: 'white'}} onPress={() => navigation.navigate('Payment')}>
+                    <MaterialCommunityIcons name='cash-usd' size={25} color='white' style={{left: 10, marginRight: 15, top: 12.5}} />
+                    <Text style={{fontWeight: 'bold', fontFamily: 'normal', color: 'white', fontSize: 16, textAlignVertical: 'center'}}>Payment</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={{width: '100%', height: 50, flexDirection: 'row', borderBottomWidth: 1, borderBottomColor: 'white'}} onPress={() => navigation.navigate('Privacy')}>
+                    <MaterialCommunityIcons name='lock' size={25} color='white' style={{left: 10, marginRight: 15, top: 12.5}}/>
+                    <Text style={{fontWeight: 'bold', fontFamily: 'normal', color: 'white', fontSize: 16, textAlignVertical: 'center'}}>Privacy</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={{width: '100%', height: 50, flexDirection: 'row', borderBottomWidth: 1, borderBottomColor: 'white'}} onPress={() => navigation.navigate('Notifications')}>
+                    <MaterialCommunityIcons name='bell' size={25} color='white' style={{left: 10, marginRight: 15, top: 12.5}} />
+                    <Text style={{fontWeight: 'bold', fontFamily: 'normal', color: 'white', fontSize: 16, textAlignVertical: 'center'}}>Notifications</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={{width: '100%', height: 50, flexDirection: 'row', borderBottomWidth: 1, borderBottomColor: 'white'}} onPress={() => navigation.navigate('Security')}>
+                    <MaterialCommunityIcons name='shield-alert' size={25} color='white' style={{left: 10, marginRight: 17.5, top: 12.5}} />
+                    <Text style={{fontWeight: 'bold', fontFamily: 'normal', color: 'white', fontSize: 16, textAlignVertical: 'center'}}>Security</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={{width: '100%', height: 50, flexDirection: 'row', borderBottomWidth: 1, borderBottomColor: 'white'}} onPress={() => navigation.navigate('Preferences')}>
+                    <MaterialCommunityIcons name='lightbulb' size={25} color='white' style={{left: 10, marginRight: 17.5, top: 12.5}} />
+                    <Text style={{fontWeight: 'bold', fontFamily: 'normal', color: 'white', fontSize: 16, textAlignVertical: 'center'}}>Preferences</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={{width: '100%', height: 50, flexDirection: 'row', borderBottomWidth: 1, borderBottomColor: 'white'}} onPress={() => navigation.navigate('Account')}>
+                    <FontAwesome5  name='user-circle' color={'white'} size={22.5}  style={{left: 11, marginRight: 20, top: 12.5}}/>
+                    <Text style={{fontWeight: 'bold', fontFamily: 'normal', color: 'white', fontSize: 16, textAlignVertical: 'center'}}>Account</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={{width: '100%', height: 50, flexDirection: 'row', borderBottomWidth: 1, borderBottomColor: 'white'}} onPress={() => navigation.navigate('Help')}>
+                    <MaterialCommunityIcons name='help-circle' size={25} color='white' style={{left: 10, marginRight: 19, top: 12.5}} />
+                    <Text style={{fontWeight: 'bold', fontFamily: 'normal', color: 'white', fontSize: 16, textAlignVertical: 'center'}}>Help</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={{width: '100%', height: 50, flexDirection: 'row', borderBottomWidth: 1, borderBottomColor: 'white'}} onPress={() => navigation.navigate('About')}>
+                    <MaterialCommunityIcons name='information' size={25} color='white' style={{left: 10, marginRight: 18, top: 12.5}} />
+                    <Text style={{fontWeight: 'bold', fontFamily: 'normal', color: 'white', fontSize: 16, textAlignVertical: 'center'}}>About</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={{width: '100%', height: 50, flexDirection: 'row'}}>
+                    <MaterialCommunityIcons name='logout-variant' size={25} color='white' style={{left: 10, marginRight: 17.5, top: 12.5}} />
+                    <Text style={{fontWeight: 'bold', fontFamily: 'normal', color: 'white', fontSize: 16, textAlignVertical: 'center'}}>Log Out</Text>
+                </TouchableOpacity>
+            </View>
+        </View>
+    )
+}
+
+function Payment() {
+    return(
+        <View style={{flex: 1, backgroundColor: '#121212', alignItems: 'center'}}>
+            <TouchableOpacity style={{height: '27%', width: '80%', backgroundColor: '#282828', right: 10, borderRadius: 10, marginBottom: 10, justifyContent: 'center' }}>
+                <Text style={{color: 'white', fontWeight: 'bold', letterSpacing: 2, textAlign: 'center', fontSize: 15}}>UPCOMING TRANSACTIONS</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={{height: '27%', width: '80%', backgroundColor: '#282828', right: 10, borderRadius: 10, marginBottom: 10, justifyContent: 'center' }}>
+                <Text style={{color: 'white', fontWeight: 'bold', letterSpacing: 2, textAlign: 'center', fontSize: 15}}>PREVIOUS TRANSACTIONS</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={{height: '27%', width: '80%', backgroundColor: '#282828', right: 10, borderRadius: 10, marginBottom: 10, justifyContent: 'center' }}>
+                <Text style={{color: 'white', fontWeight: 'bold', letterSpacing: 2, textAlign: 'center', fontSize: 15}}>PAYMENT METHODS</Text>
+            </TouchableOpacity>
+        </View>
+    )
+}
+
+function Privacy() {
+    return(
+        <View style={{flex: 1, backgroundColor: '#121212', alignItems: 'center'}}>
+            <TouchableOpacity style={{height: '27%', width: '80%', backgroundColor: '#282828', right: 10, borderRadius: 10, marginBottom: 10, justifyContent: 'center' }}>
+                <Text style={{color: 'white', fontWeight: 'bold', letterSpacing: 2, textAlign: 'center', fontSize: 15}}>ADS</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={{height: '27%', width: '80%', backgroundColor: '#282828', right: 10, borderRadius: 10, marginBottom: 10, justifyContent: 'center' }}>
+                <Text style={{color: 'white', fontWeight: 'bold', letterSpacing: 2, textAlign: 'center', fontSize: 15}}>PEOPLE</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={{height: '27%', width: '80%', backgroundColor: '#282828', right: 10, borderRadius: 10, marginBottom: 10, justifyContent: 'center' }}>
+                <Text style={{color: 'white', fontWeight: 'bold', letterSpacing: 2, textAlign: 'center', fontSize: 15}}>INTERACTIONS</Text>
+            </TouchableOpacity>
+        </View>
+    )
+}
+
+function Notifications() {
+    return(
+        <View style={{flex: 1, backgroundColor: '#121212', alignItems: 'center'}}>
+            <TouchableOpacity style={{height: '27%', width: '80%', backgroundColor: '#282828', right: 10, borderRadius: 10, marginBottom: 10, justifyContent: 'center' }}>
+                <Text style={{color: 'white', fontWeight: 'bold', letterSpacing: 2, textAlign: 'center', fontSize: 15}}>ON</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={{height: '27%', width: '80%', backgroundColor: '#282828', right: 10, borderRadius: 10, marginBottom: 10, justifyContent: 'center' }}>
+                <Text style={{color: 'white', fontWeight: 'bold', letterSpacing: 2, textAlign: 'center', fontSize: 15}}>OFF</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={{height: '27%', width: '80%', backgroundColor: '#282828', right: 10, borderRadius: 10, marginBottom: 10, justifyContent: 'center' }}>
+                <Text style={{color: 'white', fontWeight: 'bold', letterSpacing: 2, textAlign: 'center', fontSize: 15}}>MANAGE</Text>
+            </TouchableOpacity>
+        </View>
+    )
+}
+
+function Security() {
+    return(
+        <View style={{flex: 1, backgroundColor: '#121212', alignItems: 'center'}}>
+            <TouchableOpacity style={{height: '27%', width: '80%', backgroundColor: '#282828', right: 10, borderRadius: 10, marginBottom: 10, justifyContent: 'center' }}>
+                <Text style={{color: 'white', fontWeight: 'bold', letterSpacing: 2, textAlign: 'center', fontSize: 15}}>DATA</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={{height: '27%', width: '80%', backgroundColor: '#282828', right: 10, borderRadius: 10, marginBottom: 10, justifyContent: 'center' }}>
+                <Text style={{color: 'white', fontWeight: 'bold', letterSpacing: 2, textAlign: 'center', fontSize: 15}}>LOGIN ACTIVITY</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={{height: '27%', width: '80%', backgroundColor: '#282828', right: 10, borderRadius: 10, marginBottom: 10, justifyContent: 'center' }}>
+                <Text style={{color: 'white', fontWeight: 'bold', letterSpacing: 2, textAlign: 'center', fontSize: 15}}>2FA AUTHENTICATION</Text>
+            </TouchableOpacity>
+        </View>
+    )
+}
+
+function Preferences() {
+    return(
+        <View style={{flex: 1, backgroundColor: '#121212', alignItems: 'center'}}>
+            <TouchableOpacity style={{height: '27%', width: '80%', backgroundColor: '#282828', right: 10, borderRadius: 10, marginBottom: 10, justifyContent: 'center' }}>
+                <Text style={{color: 'white', fontWeight: 'bold', letterSpacing: 2, textAlign: 'center', fontSize: 15}}>LIGHT OR DARK MODE</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={{height: '27%', width: '80%', backgroundColor: '#282828', right: 10, borderRadius: 10, marginBottom: 10, justifyContent: 'center' }}>
+                <Text style={{color: 'white', fontWeight: 'bold', letterSpacing: 2, textAlign: 'center', fontSize: 15}}>LOCATION SETTINGS</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={{height: '27%', width: '80%', backgroundColor: '#282828', right: 10, borderRadius: 10, marginBottom: 10, justifyContent: 'center' }}>
+                <Text style={{color: 'white', fontWeight: 'bold', letterSpacing: 2, textAlign: 'center', fontSize: 15}}>ACCOUNT TYPE</Text>
+            </TouchableOpacity>
+        </View>
+    )
+}
+
+function Account() {
+    return(
+        <View style={{flex: 1, backgroundColor: '#121212', alignItems: 'center'}}>
+            <TouchableOpacity style={{height: '27%', width: '80%', backgroundColor: '#282828', right: 10, borderRadius: 10, marginBottom: 10, justifyContent: 'center' }}>
+                <Text style={{color: 'white', fontWeight: 'bold', letterSpacing: 2, textAlign: 'center', fontSize: 15}}>CHANGE ACCOUNT DETAILS</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={{height: '27%', width: '80%', backgroundColor: '#282828', right: 10, borderRadius: 10, marginBottom: 10, justifyContent: 'center' }}>
+                <Text style={{color: 'white', fontWeight: 'bold', letterSpacing: 2, textAlign: 'center', fontSize: 15}}>LANGUAGE</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={{height: '27%', width: '80%', backgroundColor: '#282828', right: 10, borderRadius: 10, marginBottom: 10, justifyContent: 'center' }}>
+                <Text style={{color: 'white', fontWeight: 'bold', letterSpacing: 2, textAlign: 'center', fontSize: 15}}>CONNECTED ACCOUNTS</Text>
+            </TouchableOpacity>
+        </View>
+    )
+}
+
+function Help() {
+    return(
+        <View style={{flex: 1, backgroundColor: '#121212', alignItems: 'center'}}>
+            <TouchableOpacity style={{height: '27%', width: '80%', backgroundColor: '#282828', right: 10, borderRadius: 10, marginBottom: 10, justifyContent: 'center' }}>
+                <Text style={{color: 'white', fontWeight: 'bold', letterSpacing: 2, textAlign: 'center', fontSize: 15}}>FREQUENTLY ASKED QUESTIONS</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={{height: '27%', width: '80%', backgroundColor: '#282828', right: 10, borderRadius: 10, marginBottom: 10, justifyContent: 'center' }}>
+                <Text style={{color: 'white', fontWeight: 'bold', letterSpacing: 2, textAlign: 'center', fontSize: 15}}>GIVE US SOME FEEDBACK</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={{height: '27%', width: '80%', backgroundColor: '#282828', right: 10, borderRadius: 10, marginBottom: 10, justifyContent: 'center' }}>
+                <Text style={{color: 'white', fontWeight: 'bold', letterSpacing: 2, textAlign: 'center', fontSize: 15}}>REPORT A BUG</Text>
+            </TouchableOpacity>
+        </View>
+    )
+}
+
+function About() {
+    return(
+        <View style={{flex: 1, backgroundColor: '#121212', alignItems: 'center'}}>
+            <TouchableOpacity style={{height: '27%', width: '80%', backgroundColor: '#282828', right: 10, borderRadius: 10, marginBottom: 10, justifyContent: 'center' }}>
+                <Text style={{color: 'white', fontWeight: 'bold', letterSpacing: 2, textAlign: 'center', fontSize: 15}}>TERMS AND CONDITIONS</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={{height: '27%', width: '80%', backgroundColor: '#282828', right: 10, borderRadius: 10, marginBottom: 10, justifyContent: 'center' }}>
+                <Text style={{color: 'white', fontWeight: 'bold', letterSpacing: 2, textAlign: 'center', fontSize: 15}}>PRIVACY POLICY</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={{height: '27%', width: '80%', backgroundColor: '#282828', right: 10, borderRadius: 10, marginBottom: 10, justifyContent: 'center' }}>
+                <Text style={{color: 'white', fontWeight: 'bold', letterSpacing: 2, textAlign: 'center', fontSize: 15}}>LEGAL</Text>
+            </TouchableOpacity>
+        </View>
+    )
+}
+
+  function Default() {
+      const navigation = useNavigation();
+      return(
+        <View style={{height: '100%', width: '100%', alignItems: 'center', backgroundColor: '#121212'}}>
+            <View style={{flexDirection: 'row', right: 67.5}}>
+                <View style={{height: 75, width: 75, backgroundColor: 'white', borderRadius: 37.5, marginRight: 10, top: 10}}>
+                    <Image 
+                        source={require('./images/clothes_test.jpg')}
+                        style={{width: '100%', height: '100%', borderRadius: 37.5}}
+                    />
+                </View>
+                <Text style={{color: 'white', fontWeight: 'bold', fontSize: 25, left: 5}}>Zayaan</Text>
+                <View style={{flexDirection: 'row', right: 95, top: 35, right: 75}}>
+                    <Text style={{color: 'white', fontWeight: 'bold', fontSize: 20, marginRight: 5}}>4.61</Text>
+                    <Entypo name='star' color='#282828' size={20} style={{top: 2}} />
+                </View>
+            </View>
+            <View style={{flexDirection: 'column', left: 150, bottom: 70}}>
+                <TouchableOpacity style={{backgroundColor: '#282828', width: 60, height: 25, borderRadius: 5, justifyContent: 'center', alignItems: 'center', marginBottom: 5}} activeOpacity={0.5} onPress={() => navigation.navigate('Settings')}>
+                    <Feather name='settings' size={20} color='white' />
+                </TouchableOpacity>
+                <TouchableOpacity style={{backgroundColor: '#282828', width: 60, height: 25, borderRadius: 5, justifyContent: 'center', alignItems: 'center'}} activeOpacity={0.5} onPress={() => navigation.navigate('Edit')}>
+                    <AntDesign name='ellipsis1' size={20} color='white' />
+                </TouchableOpacity>
+            </View>
+            <View style={{flexDirection: 'row', bottom: 122.5, left: 50}}>
+                <MaterialCommunityIcons name='tshirt-crew' color='#282828' size={20} style={{marginRight: 5}} />
+                <MaterialCommunityIcons name='cellphone' color='#282828' size={20} style={{marginRight: 5}} />
+                <MaterialCommunityIcons name='soccer' color='#282828' size={20} />
+            </View>
+            <View style={{flexDirection: 'row', bottom: 85, right:30}}>
+                <Text style={{color: 'white', fontSize: 20, fontWeight: 'bold', marginRight: 5}}>Followers</Text>
+                <Text style={{color: '#282828', fontSize: 20}}>1m</Text>
+            </View>
+            <TouchableOpacity style={{width: '90%', height: 30, backgroundColor: '#52B2BF', zIndex:1, bottom: 60, borderRadius: 5, justifyContent:'center',alignItems: 'center'}}>
+                <Text style={{color:'white', fontWeight:'bold', fontSize: 15}}>Follow</Text>
+            </TouchableOpacity>
+            <View style={{zIndex: 1, height: '100%', width: '100%', bottom: 30, right: 5}}>
+                <Slider />
+            </View>
+        </View> 
+      )
+  }
+
+  function EditProfile() {
+    const navigation = useNavigation();
+    return(
+      <View style={{height: '100%', width: '100%', alignItems: 'center', backgroundColor: '#121212'}}>
+          <View style={{flexDirection: 'row', right: 67.5}}>
+              <View style={{height: 75, width: 75, backgroundColor: 'white', borderRadius: 37.5, marginRight: 10, top: 10}}>
+                  <Image 
+                      source={require('./images/clothes_test.jpg')}
+                      style={{width: '100%', height: '100%', borderRadius: 37.5}}
+                  />
+              </View>
+              <Text style={{color: 'white', fontWeight: 'bold', fontSize: 25, left: 5}}>Zayaan</Text>
+              <View style={{flexDirection: 'row', right: 95, top: 35, right: 75}}>
+                  <Text style={{color: 'white', fontWeight: 'bold', fontSize: 20, marginRight: 5}}>4.61</Text>
+                  <Entypo name='star' color='#282828' size={20} style={{top: 2}} />
+              </View>
+          </View>
+          <View style={{flexDirection: 'column', left: 150, bottom: 70}}>
+              <TouchableOpacity style={{backgroundColor: '#282828', width: 60, height: 25, borderRadius: 5, justifyContent: 'center', alignItems: 'center', top: 25}} activeOpacity={0.5} onPress={() => navigation.navigate('Default')}>
+                  <AntDesign name='check' size={20} color='white' />
+              </TouchableOpacity>
+          </View>
+          <View style={{flexDirection: 'row', bottom: 90, left: 50}}>
+              <MaterialCommunityIcons name='tshirt-crew' color='#282828' size={20} style={{marginRight: 5}} />
+              <MaterialCommunityIcons name='cellphone' color='#282828' size={20} style={{marginRight: 5}} />
+              <MaterialCommunityIcons name='soccer' color='#282828' size={20} />
+          </View>
+          <View style={{flexDirection: 'row', bottom: 55, right:30}}>
+              <Text style={{color: 'white', fontSize: 20, fontWeight: 'bold', marginRight: 5}}>Followers</Text>
+              <Text style={{color: '#282828', fontSize: 20}}>1m</Text>
+          </View>
+          <TouchableOpacity style={{width: '90%', height: 30, backgroundColor: '#52B2BF', zIndex:1, bottom: 30, borderRadius: 5, justifyContent:'center',alignItems: 'center'}}>
+              <Text style={{color:'white', fontWeight:'bold', fontSize: 15}}>Follow</Text>
+          </TouchableOpacity>
+          <View style={{zIndex: 1, height: '100%', width: '100%'}}>
+              <EditSlider />
+          </View>
+      </View> 
+    )
+}
+
+  function ItemsOnProfile() {
+      const navigation = useNavigation();
+      return(
+          <View style={{flex: 1, backgroundColor: '#121212', justifyContent: 'center'}}>
+              <TouchableOpacity style={{width: '90%', height: 40, left: 12.5, borderColor: 'white', borderWidth: 1, top: 20, justifyContent: 'center', alignItems: 'center'}} onPress={() => navigation.navigate('Edit')}>
+                <Text style={{fontSize: 20, fontWeight: 'bold', color: 'white'}}>CONFIRM</Text>
+              </TouchableOpacity>
+            <View style={{width: '100%', height: '100%', flexWrap: 'wrap', flexDirection: 'row', left: 6, top: 50}}>
+                <TouchableOpacity style={{backgroundColor: '#282828', width: '45%', height: '35%', borderRadius: 5, marginRight: 10, marginBottom: 10, justifyContent: 'center', alignItems: 'center', flexDirection: 'column'}}>
+                    <MaterialIcons name='phone-iphone' color='white' size={100} style={{marginBottom: 25}} />
+                    <Text style={{color: 'white', fontWeight: 'bold', fontSize: 15}}>ELECTRONICS</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={{backgroundColor: '#282828', width: '45%', height: '35%', borderRadius: 5, marginRight: 10, marginBottom: 10, justifyContent: 'center', alignItems: 'center', flexDirection: 'column'}}>
+                    <MaterialCommunityIcons name='lava-lamp' size={100} style={{marginBottom: 25}} color='white' />
+                    <Text style={{color: 'white', fontWeight: 'bold', fontSize: 15}}>DECOR</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={{backgroundColor: '#282828', width: '45%', height: '35%', borderRadius: 5, marginRight: 10, marginBottom: 10, justifyContent: 'center', alignItems: 'center', flexDirection: 'column'}}>
+                    <MaterialCommunityIcons name='tshirt-crew' size={100} color='white' style={{marginBottom: 25}} />
+                    <Text style={{color: 'white', fontWeight: 'bold', fontSize: 15}}>CLOTHING</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={{backgroundColor: '#282828', width: '45%', height: '35%', borderRadius: 5, marginRight: 10, marginBottom: 10, justifyContent: 'center', alignItems: 'center', flexDirection: 'column'}}>
+                    <MaterialCommunityIcons name='soccer' color='white' size={100} style={{marginBottom: 25}}/>
+                    <Text style={{color: 'white', fontWeight: 'bold', fontSize: 15}}>SPORTS</Text>
+                </TouchableOpacity>
+            </View>
+          </View>
+      )
+  }
+  
+
+  function Posts() {
+    const navigation = useNavigation();
+    return(
+        <View style={{width: '100%', height: '100%', backgroundColor: '#121212', alignItems: 'center'}}>
+            <View style={{flexDirection: 'row', width: '100%', height: 75, left: 5, bottom: 10}}>
+                <TouchableOpacity style={{height: 50, width: '50%', justifyContent: 'center', borderRightColor: '#282828', borderRightWidth: 2}}>
+                    <Text style={{textAlign: 'center', fontSize: 15, color: 'white', fontWeight: 'bold', letterSpacing: 2}}>MY POSTS</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={{height: 50, width: '50%', justifyContent: 'center'}} onPress={() => navigation.navigate('Wishlist')}>
+                    <Text style={{textAlign: 'center', fontSize: 15, color: 'white', letterSpacing: 2}}>WISHLIST</Text>
+                </TouchableOpacity>
+            </View>
+            <View style={{flexDirection: 'row', flexWrap: 'wrap', left: 7.5, top: 25, alignItems: 'center', justifyContent: 'center', left: 15}}>
+                <Post />
+                <Post />
+                <Post />
+                <Post />
+                <Post />
+                <Post />
+            </View>
+        </View>
+    )
+}
+
+function Wishlist() {
+    const navigation = useNavigation();
+    return(
+        <View style={{width: '100%', height: '100%', backgroundColor: '#121212', alignItems: 'center'}}>
+            <View style={{flexDirection: 'row', width: '100%', height: 75,left:5 , bottom: 10}}>
+                <TouchableOpacity style={{height: 50, width: '50%', justifyContent: 'center', borderRightColor: '#282828', borderRightWidth: 2}}  onPress={() => navigation.navigate('Posts')}>
+                    <Text style={{textAlign: 'center', fontSize: 15, color: 'white', letterSpacing: 2}}>MY POSTS</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={{height: 50, width: '50%', justifyContent: 'center'}}>
+                    <Text style={{textAlign: 'center', fontSize: 15, color: 'white', letterSpacing: 2, fontWeight: 'bold'}}>WISHLIST</Text>
+                </TouchableOpacity>
+            </View>
+            <View style={{flexDirection: 'row', flexWrap: 'wrap', left: 10, top: 25, alignItems: 'center', justifyContent: 'center'}}>
+                <Post />
+                <Post />
+                <Post />
+                <Post />
+                <Post />
+                <Post />
+            </View>
+        </View>
+    )
+}
+
+function Post() {
+    return(
+        <TouchableOpacity style={{backgroundColor: 'white', borderRadius: 5, height: 110, width: 110, marginRight: 15, marginBottom: 15}}>
+
+        </TouchableOpacity>
+    )
+}
+
+
+
+export class Slider extends Component {
+    render() {
+        return(
+            <NavigationContainer independent={true}>
+                <Stack.Navigator screenOptions={{
+                    headerShown: false,
+                    cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS
+                
+                }} initialRouteName='Posts'>
+                    <Stack.Screen name='Posts' component={Posts} />
+                    <Stack.Screen name='Wishlist' component={Wishlist} />
+                </Stack.Navigator>
+            </NavigationContainer>
+        )
     }
-})
+}
+
+function EditPosts() {
+    const navigation = useNavigation();
+    return(
+        <View style={{width: '100%', height: '100%', backgroundColor: '#121212', alignItems: 'center'}}>
+            <View style={{flexDirection: 'row', width: '100%', height: 75}}>
+                <TouchableOpacity style={{height: 50, width: '50%', justifyContent: 'center', borderRightColor: '#282828', borderRightWidth: 2}}>
+                    <Text style={{textAlign: 'center', fontSize: 15, color: 'white', fontWeight: 'bold', letterSpacing: 2}}>MY POSTS</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={{height: 50, width: '50%', justifyContent: 'center'}} onPress={() => navigation.navigate('Wishlist')}>
+                    <Text style={{textAlign: 'center', fontSize: 15, color: 'white', letterSpacing: 2}}>WISHLIST</Text>
+                </TouchableOpacity>
+            </View>
+            <View style={{flexDirection: 'row', flexWrap: 'wrap', left: 7.5, top: 25, alignItems: 'center', justifyContent: 'center'}}>
+                <EditPost />
+                <EditPost />
+                <EditPost />
+                <EditPost />
+                <EditPost />
+                <EditPost />
+            </View>
+        </View>
+    )
+}
+
+function EditWishlist() {
+    const navigation = useNavigation();
+    return(
+        <View style={{width: '100%', height: '100%', backgroundColor: '#121212', alignItems: 'center'}}>
+            <View style={{height: 2, width: '90%', backgroundColor: '#49cabd'}} />
+            <View style={{flexDirection: 'row', width: '100%', height: 75}}>
+                <TouchableOpacity style={{height: 75, width: '50%', justifyContent: 'center'}}  onPress={() => navigation.navigate('Posts')}>
+                    <Text style={{textAlign: 'center', fontSize: 25, color: 'white', letterSpacing: 2}}>MY POSTS</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={{height: 75, width: '50%', justifyContent: 'center'}}>
+                    <Text style={{textAlign: 'center', fontSize: 25, color: 'white', letterSpacing: 2, fontWeight: 'bold'}}>WISHLIST</Text>
+                </TouchableOpacity>
+            </View>
+            <View style={{height: 2, width: '90%', backgroundColor: '#49cabd'}} />
+            <View style={{flexDirection: 'row', flexWrap: 'wrap', left: 10, top: 25, alignItems: 'center', justifyContent: 'center'}}>
+                <EditPost />
+                <EditPost />
+                <EditPost />
+                <EditPost />
+                <EditPost />
+                <EditPost />
+            </View>
+        </View>
+    )
+}
+
+function EditPost() {
+    return(
+        <View style={{backgroundColor: 'white', borderRadius: 5, height: 110, width: 110, marginRight: 15, marginBottom: 15}}>
+            <TouchableOpacity style={{backgroundColor: 'red', width: 40, height: 40, borderRadius: 25, justifyContent: 'center', left: 80, bottom: 10, alignItems: 'center'}} activeOpacity={0.5}>
+                <AntDesign name='minus' color='white' size={30} />
+            </TouchableOpacity>
+        </View>
+    )
+}
+
+
+
+class EditSlider extends Component {
+    render() {
+        return(
+            <NavigationContainer independent={true}>
+                <Stack.Navigator screenOptions={{
+                    headerShown: false,
+                    cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS
+                
+                }} initialRouteName='Posts'>
+                    <Stack.Screen name='Posts' component={EditPosts} />
+                    <Stack.Screen name='Wishlist' component={EditWishlist} />
+                </Stack.Navigator>
+            </NavigationContainer>
+        )
+    }
+}
+
