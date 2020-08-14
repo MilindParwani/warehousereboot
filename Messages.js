@@ -26,17 +26,11 @@ function MessagesV() {
 function Message() {
     const navigation = useNavigation();
     return(
-        <TouchableOpacity style={{backgroundColor: '#282828', width: '90%', height: 115, marginBottom: 20, borderRadius: 5, flexDirection: 'row'}} onPress={() => navigation.navigate('Individual')} activeOpacity={0.5}>
-            <View style={{width: 50, height: 50, borderRadius: 50, backgroundColor: 'white', left: 12.5, marginRight: 20, top: 30}}></View>
+        <TouchableOpacity style={{backgroundColor: '#282828', width: '90%', height: 90, marginBottom: 10, borderRadius: 5, flexDirection: 'row'}} onPress={() => navigation.navigate('Individual')} activeOpacity={0.5}>
+            <View style={{width: 50, height: 50, borderRadius: 50, backgroundColor: 'white', left: 12.5, marginRight: 20, top: 20}}></View>
             <Text style={{fontSize: 20, color: 'white', fontWeight: 'bold', top: 20, left: 5}}>Milind Parwani</Text>
-            <View style={{flexDirection: 'row', top: 50, right: 127.5}}>
-                <Text style={{fontSize: 15, color: 'white', fontWeight: 'bold', marginRight: 50}}>Offer</Text>
-                <Text style={{fontSize: 15, color: 'white', fontWeight: 'bold', marginRight: 50}}>Date</Text>
-                <Text style={{fontSize: 15, color: 'white', fontWeight: 'bold'}}>Status</Text>
-            </View>
-            <View style={{flexDirection: 'row', top: 70, right: 340}}>
-                <Text style={{fontSize: 15, color: 'white', marginRight: 40}}>$10.00</Text>
-                <Text style={{fontSize: 15, color: 'white', marginRight: 20}}>12/07/20</Text>
+            <View style={{flexDirection: 'row', top: 47.5, right: 127.5}}>
+                <Text style={{fontSize: 15, color: 'white', fontWeight: 'bold', marginRight: 17.5}}>Status</Text>
                 <Text style={{fontSize: 15, color: 'white'}}>Confirmed</Text>
             </View>
         </TouchableOpacity>
@@ -75,7 +69,7 @@ export default class Messages extends Component {
     render() {
         return(
             <NavigationContainer independent={true}>
-                <Stack.Navigator initialRouteName='Messages' screenOptions={{headerShown: false}}>
+                <Stack.Navigator initialRouteName='Messages' screenOptions={{headerShown: false, cardStyleInterpolator: CardStyleInterpolators.forVerticalIOS}}>
                     <Stack.Screen name='Messages' component={MessagesV} />
                     <Stack.Screen name='Individual' component={Individual} />
                 </Stack.Navigator>

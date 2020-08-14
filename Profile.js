@@ -18,7 +18,7 @@ export default class Profile extends Component {
     render() {
         return(
             <NavigationContainer independent={true}>
-                <Stack.Navigator initialRouteName='Edit' screenOptions={{headerShown: false, cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS}}>
+                <Stack.Navigator initialRouteName='Default' screenOptions={{headerShown: false, cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS}}>
                     <Stack.Screen name='Default' component={Default} />
                     <Stack.Screen name='Edit' component={EditProfile} />
                     <Stack.Screen name='Settings' component={Settings} />
